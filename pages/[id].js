@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRef } from 'react';
-import TopBar from '../../components/TopBar';
-import Viewer from '../../components/Viewer';
+import TopBar from '../components/TopBar';
+import Viewer from '../components/Viewer';
 import highlight from 'highlight.js';
 import axios from 'axios';
 
