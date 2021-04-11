@@ -1,7 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from 'axios';
+import CodeEditor from 'react-simple-code-editor';
+import highlight from "highlight.js";
+import "../node_modules/highlight.js/styles/atom-one-dark.css";
 
 export default function Editor({ editorRef }) {
+  const [code, setCode] = useState();
 
   useEffect(() => {
     document.addEventListener("keydown", function(e) {
@@ -31,8 +35,12 @@ export default function Editor({ editorRef }) {
   }, [editorRef]);
 
   return (
-    <textarea
+    <CodeEditor
       autoFocus={true}
+      value={code}
+      onValueChange={code => setCode(code) }
+      padding={10}
+      highlight={code => highlight.highlightAuto(code == undefined ? "" : code).value}
       style={{
         backgroundColor: "#101010",
         resize: "none",
@@ -40,7 +48,6 @@ export default function Editor({ editorRef }) {
         flexGrow: 1,
         color: "#fbfbfb",
         fontSize: 16,
-        padding: 10,
         margin: 10,
         borderRadius: 10,
         outline: "none",
