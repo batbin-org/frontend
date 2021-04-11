@@ -1,0 +1,80 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #181818;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+}
+
+#__next {
+  height: 100vh;
+}
+
+.shadow-lg {
+  --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-2xl {
+  --tw-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+/* Works on Firefox */
+* {
+  scrollbar-color: #505050 #282828;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar-track {
+  background: #505050;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #282828;
+  border-radius: 20px;
+  border: 3px solid #000000;
+}
+
+/* line number styles from https://github.com/MKRhere/bin */
+td {
+	color: #EEE;
+	padding: 0.3em;
+	padding-left: 1em;
+  vertical-align: middle;
+}
+
+td.line-number {
+	background: #111;
+  color: #807d7d;
+	text-align: right;
+  font-size: 15;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select:none;
+	user-select: none;
+}
+
+td.line-number:hover {
+	background: #222;
+	cursor: pointer;
+
+}
+
+td.line-number::before {
+	padding-right: 1em;
+}
