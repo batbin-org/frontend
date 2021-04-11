@@ -28,26 +28,22 @@ const getHtmlFromCode = (code, language) => {
   return `<table>${retval}</table>`;
 }
 
+const makeProp = content => { return { props: { content } } };
+
 export const getServerSideProps = async (context) => {
   const { id } = context.query;
-  
-  let content;
 
   try {
     const [actualId, language] = id.split('.');
     const response = (await axios.get(`http://localhost:3849/get?id=${actualId}`)).data;
     if(response.status === "failure") {
-      content = response.message;
+      return makeProp(response.message);
     } else {
-      let lang;
-      if(language) lang = [language];
-      content = getHtmlFromCode(response + "\n", lang);
+      return makeProp(getHtmlFromCode(response + "\n", language ? [language] : undefined));
     }
   } catch(e) {
-    content = "Could not fetch paste!";
+    return makeProp("Could not fetch paste!");
   }
-
-  return { props: { content } };
 }
 
 export default Fetcher;
