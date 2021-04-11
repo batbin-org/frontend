@@ -44,7 +44,7 @@ export default function Editor({ editorRef }) {
         margin: 10,
         borderRadius: 10,
         outline: "none",
-        fontFamily: 'Fira Mono'
+        fontFamily: 'Fira Mono, monospace'
       }}
       ref={editorRef}
       />
