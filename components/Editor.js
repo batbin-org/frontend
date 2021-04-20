@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 
 export default function Editor({ editorRef }) {
-  const [code, setCode] = useState();
-
   useEffect(() => {
     document.addEventListener("keydown", function(e) {
       if (e.key === "s" && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
