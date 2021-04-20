@@ -12,7 +12,10 @@ const Fetcher = ({ content, id }) => {
   return (
     <div style={{ display: "flex", flexDirection: "column", overflowX: 'hidden', height: "100%" }}>
         <Head>
-          <meta name="og:image" key="og:image" content={`https://p.uditkaro.de/p/${id}`} />
+          <meta property="og:title" content={`Batbin - ${id}`} />
+          <meta property="og:type" content="website"/>
+          <meta property="og:site_name" content="Batbin"/>
+          <meta property="og:image" content={`https://p.uditkaro.de/p/${id}`} />
         </Head>
         <TopBar editorRef={editorRef} buttonText="New" buttonAction={() => { window.location = "https://b.uditkaro.de" }} />
         <Viewer content={content} />
