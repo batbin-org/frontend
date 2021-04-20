@@ -4,12 +4,16 @@ import TopBar from '../components/TopBar';
 import Viewer from '../components/Viewer';
 import highlight from 'highlight.js';
 import axios from 'axios';
+import Head from 'next/head';
 
-const Fetcher = ({ content }) => {
+const Fetcher = ({ content, id }) => {
   const editorRef = useRef(null);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", overflowX: 'hidden', height: "100%" }}>
+        <Head>
+          <meta name="og:image" key="og:image" content={`https://p.uditkaro.de/p/${id}`} />
+        </Head>
         <TopBar editorRef={editorRef} buttonText="New" buttonAction={() => { window.location = "https://b.uditkaro.de" }} />
         <Viewer content={content} />
     </div>
@@ -28,7 +32,7 @@ const getHtmlFromCode = (code, language) => {
   return `<table>${retval}</table>`;
 }
 
-const makeProp = content => { return { props: { content } } };
+const makeProp = (content, id) => { return { props: { content, id } } };
 
 export const getServerSideProps = async (context) => {
   const { id } = context.query;
@@ -39,7 +43,7 @@ export const getServerSideProps = async (context) => {
     if(response.status === "failure") {
       return makeProp(response.message);
     } else {
-      return makeProp(getHtmlFromCode(response + "\n", language ? [language] : undefined));
+      return makeProp(getHtmlFromCode(response + "\n", language ? [language] : undefined), id);
     }
   } catch(e) {
     return makeProp("Could not fetch paste!");
