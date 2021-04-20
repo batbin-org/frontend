@@ -12,7 +12,7 @@ const Fetcher = ({ content, id }) => {
   return (
     <div style={{ display: "flex", flexDirection: "column", overflowX: 'hidden', height: "100%" }}>
         <Head>
-          <meta property="og:title" content={`Batbin - ${id}`} />
+          <meta property="og:title" content={`${id}`} />
           <meta property="og:type" content="website"/>
           <meta property="og:site_name" content="Batbin"/>
           <meta property="og:image" content={`https://p.uditkaro.de/p/${id}`} />
