@@ -16,7 +16,7 @@ const Fetcher = ({ content, id }) => {
           <meta property="og:type" content="website"/>
           <meta property="og:site_name" content="Batbin"/>
           { id !== undefined &&
-              <meta property="og:image" content={`https://p.uditkaro.de/p/${id}`} />
+              <meta property="og:image" content={`https://p.uditkaro.de/p/${id.split('.')[0]}`} />
           }
         </Head>
         <TopBar editorRef={editorRef} buttonText="New" buttonAction={() => { window.location = "https://b.uditkaro.de" }} />
