@@ -26,7 +26,7 @@ export default function TopBar({ buttonText, buttonAction }) {
       </h2>
 
       <div>
-        <Button backgroundColor="#010101" color="#fbfbfb" style={{ marginRight: 10 }} onClick={() => { window.location = "https://github.com/uditkarode/BatbinFrontend" }}>
+        <Button backgroundColor="#010101" color="#fbfbfb" style={{ marginRight: 10 }} onClick={() => { window.location = "https://github.com/batbin-org" }}>
           Source
         </Button>
 
