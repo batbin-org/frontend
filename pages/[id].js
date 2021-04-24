@@ -6,18 +6,27 @@ import highlight from 'highlight.js';
 import axios from 'axios';
 import Head from 'next/head';
 
-const Fetcher = ({ content, id }) => {
+function getPreviewUrl(id, ext) {
+  const splitId = id.split('.')[0];
+  if(ext == undefined) {
+    return `https://p.uditkaro.de/p/${splitId}`;
+  } else {
+    return `https://p.uditkaro.de/pk/${splitId}/${ext}`;
+  }
+};
+
+const Fetcher = ({ content, id, ext }) => {
   const editorRef = useRef(null);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", overflowX: 'hidden', height: "100%" }}>
         <Head>
-          <meta name="twitter:card" content="summary_large_image" />
           { id !== undefined &&
-              <meta property="twitter:image" content={`https://p.uditkaro.de/p/${id.split('.')[0]}`} />
-          }
-          { id !== undefined &&
-              <meta property="og:image" content={`https://p.uditkaro.de/p/${id.split('.')[0]}`} />
+              <>
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta property="twitter:image" content={getPreviewUrl(id, ext)} />
+                <meta property="og:image" content={getPreviewUrl(id, ext)} />
+              </>
           }
         </Head>
         <TopBar editorRef={editorRef} buttonText="New" buttonAction={() => { window.location = "https://b.uditkaro.de" }} />
@@ -38,7 +47,7 @@ const getHtmlFromCode = (code, language) => {
   return `<table>${retval}</table>`;
 }
 
-const makeProp = (content, id) => { return { props: { content, id } } };
+const makeProp = (content, id, ext) => { return { props: { content, id, ext } } };
 
 export const getServerSideProps = async (context) => {
   const { id } = context.query;
@@ -49,7 +58,7 @@ export const getServerSideProps = async (context) => {
     if(response.status === "failure") {
       return makeProp(response.message);
     } else {
-      return makeProp(getHtmlFromCode(response + "\n", language ? [language] : undefined), id);
+      return makeProp(getHtmlFromCode(response + "\n", language ? [language] : undefined), id, language);
     }
   } catch(e) {
     return makeProp("Could not fetch paste!");
