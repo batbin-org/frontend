@@ -6,7 +6,7 @@ import highlight from 'highlight.js';
 import axios from 'axios';
 import Head from 'next/head';
 
-function getPreviewUrl(id, ext) {
+const getPreviewUrl = (id, ext) => {
   const splitId = id.split('.')[0];
   if(ext == undefined) {
     return `https://p.uditkaro.de/p/${splitId}`;
@@ -35,16 +35,205 @@ const Fetcher = ({ content, id, ext }) => {
   );
 }
 
-const getHtmlFromCode = (code, language) => {
-  const retval = highlight
-          .highlightAuto(code, language)
-          .value
-          .split('\n')
-          .map((l, n) => {
-            return `<tr><td class="line-number">${n+1}</td><td>${l}</td></tr>`;
-          }).join('');
+const languageExts = {
+  "1c": "1c",
+  "abnf": "abnf",
+  "accesslog": "accesslog",
+  "actionscript": "as",
+  "ada": "ada",
+  "angelscript": "asc",
+  "apache": "apacheconf",
+  "applescript": "osascript",
+  "arcade": "arcade",
+  "arduino": "ino",
+  "armasm": "arm",
+  "asciidoc": "adoc",
+  "aspectj": "aspectj",
+  "autohotkey": "ahk",
+  "autoit": "autoit",
+  "avrasm": "avrasm",
+  "awk": "awk",
+  "axapta": "x++",
+  "bash": "sh",
+  "basic": "basic",
+  "bnf": "bnf",
+  "brainfuck": "bf",
+  "cal": "cal",
+  "capnproto": "capnp",
+  "ceylon": "ceylon",
+  "c": "c",
+  "clean": "icl",
+  "clojure": "clj",
+  "cmake": "cmake.in",
+  "coffeescript": "coffee",
+  "coq": "coq",
+  "cos": "cls",
+  "cpp": "cpp",
+  "crmsh": "crm",
+  "crystal": "cr",
+  "csharp": "cs",
+  "csp": "csp",
+  "css": "css",
+  "dart": "dart",
+  "delphi": "dpr",
+  "diff": "patch",
+  "django": "jinja",
+  "d": "d",
+  "dns": "bind",
+  "dockerfile": "docker",
+  "dos": "bat",
+  "dsconfig": "dsconfig",
+  "dts": "dts",
+  "dust": "dst",
+  "ebnf": "ebnf",
+  "elixir": "elixir",
+  "elm": "elm",
+  "erb": "erb",
+  "erlang": "erl",
+  "erlang-repl": "erlang-repl",
+  "excel": "xlsx",
+  "fix": "fix",
+  "flix": "flix",
+  "fortran": "f90",
+  "fsharp": "fs",
+  "gams": "gms",
+  "gauss": "gss",
+  "gcode": "nc",
+  "gherkin": "feature",
+  "glsl": "glsl",
+  "gml": "gml",
+  "go": "golang",
+  "golo": "golo",
+  "gradle": "gradle",
+  "groovy": "groovy",
+  "haml": "haml",
+  "handlebars": "hbs",
+  "haskell": "hs",
+  "haxe": "hx",
+  "hsp": "hsp",
+  "hy": "hylang",
+  "inform7": "i7",
+  "ini": "toml",
+  "irpf90": "irpf90",
+  "isbl": "isbl",
+  "java": "java",
+  "javascript": "js",
+  "jboss-cli": "wildfly-cli",
+  "json": "json",
+  "julia": "julia",
+  "julia-repl": "jldoctest",
+  "kotlin": "kt",
+  "lasso": "ls",
+  "latex": "tex",
+  "ldif": "ldif",
+  "leaf": "leaf",
+  "less": "less",
+  "lisp": "lisp",
+  "livescript": "ls",
+  "llvm": "llvm",
+  "lsl": "lsl",
+  "lua": "lua",
+  "makefile": "mk",
+  "markdown": "md",
+  "mathematica": "mma",
+  "matlab": "matlab",
+  "maxima": "maxima",
+  "mel": "mel",
+  "mercury": "m",
+  "mipsasm": "mips",
+  "mizar": "mizar",
+  "monkey": "monkey",
+  "moonscript": "moon",
+  "n1ql": "n1ql",
+  "nestedtext": "nt",
+  "nginx": "nginxconf",
+  "nim": "nim",
+  "nix": "nixos",
+  "nsis": "nsis",
+  "objectivec": "objc",
+  "ocaml": "ml",
+  "openscad": "scad",
+  "oxygene": "oxygene",
+  "parser3": "parser3",
+  "perl": "pl",
+  "pf": "pf.conf",
+  "pgsql": "postgres",
+  "php": "php",
+  "plaintext": "txt",
+  "pony": "pony",
+  "powershell": "ps",
+  "processing": "pde",
+  "profile": "profile",
+  "prolog": "prolog",
+  "properties": "properties",
+  "protobuf": "protobuf",
+  "puppet": "pp",
+  "purebasic": "pb",
+  "python": "py",
+  "python-repl": "pycon",
+  "q": "k",
+  "qml": "qt",
+  "reasonml": "re",
+  "rib": "rib",
+  "r": "r",
+  "roboconf": "graph",
+  "routeros": "mikrotik",
+  "rsl": "rsl",
+  "ruby": "rb",
+  "ruleslanguage": "ruleslanguage",
+  "rust": "rs",
+  "sas": "sas",
+  "scala": "scala",
+  "scheme": "scheme",
+  "scilab": "sci",
+  "scss": "scss",
+  "shell": "console",
+  "smali": "smali",
+  "smalltalk": "st",
+  "sml": "ml",
+  "sqf": "sqf",
+  "sql": "sql",
+  "stan": "stanfuncs",
+  "stata": "do",
+  "step21": "p21",
+  "stylus": "styl",
+  "subunit": "subunit",
+  "swift": "swift",
+  "taggerscript": "taggerscript",
+  "tap": "tap",
+  "tcl": "tk",
+  "thrift": "thrift",
+  "tp": "tp",
+  "twig": "craftcms",
+  "typescript": "ts",
+  "vala": "vala",
+  "vbnet": "vb",
+  "vbscript-html": "vbscript-html",
+  "vbscript": "vbs",
+  "verilog": "v",
+  "vhdl": "vhdl",
+  "vim": "vim",
+  "wasm": "wasm",
+  "x86asm": "x86asm",
+  "xl": "tao",
+  "xml": "xml",
+  "xquery": "xpath",
+  "yaml": "yml",
+  "zephir": "zep",
+};
 
-  return `<table>${retval}</table>`;
+const getHtmlFromCode = (code, language) => {
+  const hl = highlight.highlightAuto(code, language);
+
+  const retval = hl.value.split('\n')
+                      .map((l, n) => {
+                        return `<tr><td class="line-number">${n+1}</td><td>${l}</td></tr>`;
+                      }).join('');
+
+  return {
+    content: `<table>${retval}</table>`,
+    language: hl.language
+  };
 }
 
 const makeProp = (content, id, ext) => { return { props: { content, id, ext } } };
@@ -58,7 +247,8 @@ export const getServerSideProps = async (context) => {
     if(response.status === "failure") {
       return makeProp(response.message);
     } else {
-      return makeProp(getHtmlFromCode(response + "\n", language ? [language] : undefined), id, language);
+      const highlighted = getHtmlFromCode(response + "\n", language ? [language] : undefined);
+      return makeProp(highlighted.content, id, language !== undefined ? language : languageExts[highlighted.language.toLowerCase()]);
     }
   } catch(e) {
     return makeProp("Could not fetch paste!");
