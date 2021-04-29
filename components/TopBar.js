@@ -1,7 +1,5 @@
 import React from "react";
 import { Button } from "@primer/components";
-import axios from 'axios';
-import FormData from 'form-data';
 
 export default function TopBar({ buttonText, buttonAction }) {
   const tagColor = { color: "#6BA2F0" };

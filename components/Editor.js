@@ -10,7 +10,7 @@ export default function Editor({ editorRef }) {
           try {
             const form = new FormData();
             form.append('content', editorRef.current.value);
-            axios.post('https://b.uditkaro.de/api/set', form).then(result => {
+            axios.post('https://b.uditkaro.de/api/paste', form).then(result => {
               if(result.data.status === "success") {
                 window.location = `https://b.uditkaro.de/${result.data.message}`;
               } else if(result.data.status === "failure") {

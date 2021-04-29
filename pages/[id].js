@@ -243,7 +243,7 @@ export const getServerSideProps = async (context) => {
 
   try {
     const [actualId, language] = id.split('.');
-    const response = (await axios.get(`http://localhost:3849/get?id=${actualId}`)).data;
+    const response = (await axios.get(`http://localhost:3849/paste/${actualId}`)).data;
     if(response.status === "failure") {
       return makeProp(response.message);
     } else {
