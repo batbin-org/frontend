@@ -1,0 +1,14 @@
+name: "Bob The Builder"
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: node:buster 
+    steps:
+      - run: git clone https://github.com/batbin-org/frontend /frontend
+      - run: cd /frontend && yarn && yarn build
