@@ -65,7 +65,7 @@ export const languageExts = {
   "gherkin": "feature",
   "glsl": "glsl",
   "gml": "gml",
-  "go": "golang",
+  "go": "go",
   "golo": "golo",
   "gradle": "gradle",
   "groovy": "groovy",
