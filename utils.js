@@ -11,7 +11,8 @@ export const getPreviewUrl = (id, ext) => {
 };
 
 export const getHtmlFromCode = (code, language) => {
-  const hl = highlight.highlightAuto(code, language);
+  const isLengthFine = code.length < 8000;
+  const hl = isLengthFine ? highlight.highlightAuto(code, language) : code;
 
   const retval = hl.value
     .split("\n")
@@ -22,7 +23,7 @@ export const getHtmlFromCode = (code, language) => {
 
   return {
     content: `<table>${retval}</table>`,
-    language: hl.language,
+    language: isLengthFine ? hl.language : "large-text",
   };
 };
 
