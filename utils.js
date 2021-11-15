@@ -14,7 +14,7 @@ export const getHtmlFromCode = (code, language) => {
   const isLengthFine = code.length < 8000;
   const hl = isLengthFine ? highlight.highlightAuto(code, language) : code;
 
-  const retval = hl.value
+  const retval = (hl.value ?? hl)
     .split("\n")
     .map((l, n) => {
       return `<tr><td class="line-number">${n + 1}</td><td>${l}</td></tr>`;
@@ -28,5 +28,5 @@ export const getHtmlFromCode = (code, language) => {
 };
 
 export const makeProp = (content, id, ext) => {
-  return { props: { content, id, ext } };
+  return { props: { ...(content && { content }), ...(id && { id }), ...(ext && { ext }) } };
 };

@@ -78,7 +78,7 @@ export const getServerSideProps = async (context) => {
       );
     }
   } catch (e) {
-    return makeProp("Could not fetch paste!");
+    return makeProp(`Could not fetch paste because ${e}`);
   }
 };
 
