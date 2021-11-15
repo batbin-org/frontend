@@ -3,7 +3,17 @@ import "../node_modules/highlight.js/styles/atom-one-dark.css";
 
 function Viewer({ content }) {
   return (
-    <pre style={{ color: "#fbfbfb", overflowX: 'auto', paddingTop: 3, paddingLeft: 20, fontSize: 16, fontFamily: "Fira Mono, monospace" }} dangerouslySetInnerHTML={{__html: content}} />
+    <pre
+      style={{
+        color: "#fbfbfb",
+        overflowX: "auto",
+        paddingTop: 3,
+        paddingLeft: 20,
+        fontSize: 16,
+        fontFamily: "Fira Mono, monospace",
+      }}
+      dangerouslySetInnerHTML={{ __html: content }}
+    />
   );
 }
 

@@ -1,8 +1,8 @@
 {
-  "name": "NextBatbinFrontend",
+  "name": "next-batbin",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "GPL",
+  "license": "GPL-version-3-or-later",
   "scripts": {
     "dev": "next",
     "build": "next build",

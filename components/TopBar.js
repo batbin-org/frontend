@@ -24,11 +24,23 @@ export default function TopBar({ buttonText, buttonAction }) {
       </h2>
 
       <div>
-        <Button backgroundColor="#010101" color="#fbfbfb" style={{ marginRight: 10 }} onClick={() => { window.location = "https://github.com/batbin-org" }}>
+        <Button
+          backgroundColor="#010101"
+          color="#fbfbfb"
+          style={{ marginRight: 10 }}
+          onClick={() => {
+            window.location = "https://github.com/batbin-org";
+          }}
+        >
           Source
         </Button>
 
-        <Button backgroundColor="#1f61c8" color="#fbfbfb" style={{ marginRight: 10 }} onClick={buttonAction}>
+        <Button
+          backgroundColor="#1f61c8"
+          color="#fbfbfb"
+          style={{ marginRight: 10 }}
+          onClick={buttonAction}
+        >
           {buttonText}
         </Button>
       </div>
