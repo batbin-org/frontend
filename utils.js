@@ -11,7 +11,7 @@ export const getPreviewUrl = (id, ext) => {
 };
 
 export const getHtmlFromCode = (code, language) => {
-  const isLengthFine = code.length < 8000;
+  const isLengthFine = code.length < 15000;
   const hl = isLengthFine ? highlight.highlightAuto(code, language) : code;
 
   const retval = (hl.value ?? hl)
