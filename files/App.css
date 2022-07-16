@@ -77,3 +77,10 @@ td.line-number:hover {
 td.line-number::before {
   padding-right: 1em;
 }
+
+.codeline {
+  white-space: pre;
+  word-wrap: normal;
+  word-break: normal;
+}
+

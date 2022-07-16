@@ -4,6 +4,7 @@ import "../node_modules/highlight.js/styles/atom-one-dark.css";
 function Viewer({ content }) {
   return (
     <code
+      class="codeline"
       style={{
         color: "#fbfbfb",
         overflowX: "auto",
