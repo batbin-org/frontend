@@ -2,7 +2,7 @@
   "name": "next-batbin",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "GPL-version-3-or-later",
+  "license": "GPL-3.0-or-later",
   "scripts": {
     "dev": "next",
     "build": "next build",
