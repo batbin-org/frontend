@@ -1,6 +1,6 @@
 export const BIN_HOST = "http://localhost:3000";
 export const PASTE_HOST = "http://localhost:8080";
-export const PREVIEW_HOST = "https://p.uditkaro.de/";
+export const PREVIEW_HOST = "https://p.uditkaro.de";
 
 export const createConfig = {
   headers: {
