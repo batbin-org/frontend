@@ -70,11 +70,11 @@ export const getServerSideProps = async (context) => {
       return makeProp(
         highlighted.content,
         id,
-        language !== undefined
+        !!language
           ? language === "js"
             ? "ts"
             : language
-          : extensions[highlighted.language.toLowerCase()]
+          : highlighted.language ? extensions[highlighted.language.toLowerCase()] : "ts"
       );
     }
   } catch (e) {
