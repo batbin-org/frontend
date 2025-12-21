@@ -12,6 +12,7 @@ export const createConfig = {
 export const fetchConfig = {
   responseType: "text",
   responseEncoding: "utf-8",
+  transformResponse: [(data) => data],  // Prevent axios from parsing JSON
 };
 
 export const extensions = {
