@@ -1,5 +1,5 @@
 export const BIN_HOST = "https://umbra.batbin.me";
-export const PASTE_HOST = "https://api-umbra.batbin.me";
+export const PASTE_HOST = "https://umbra.batbin.me/api";
 export const PREVIEW_HOST = "https://preview-umbra.batbin.me";
 
 export const createConfig = {
